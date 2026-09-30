@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="description" content="SwipeTune - Descubra músicas incríveis arrastando para cima!">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+    <title>SwipeTune - Descubra músicas reais!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="header-top">
+                <div class="brand">
+                    <span class="brand-icon">🎵</span>
+                    <h1 class="logo">Swipe<span>Tune</span></h1>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" id="btnConfig" title="Configurações" aria-label="Configurações">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    </button>
+                    <div class="user-profile" id="userProfile" role="button" tabindex="0">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name" id="userNameDisplay">Visitante</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Barra de pesquisa -->
+        <div class="search-bar">
+            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="searchInput" placeholder="Pesquisar músicas reais no iTunes..." autocomplete="off">
+            <button class="search-clear" id="searchClear" title="Limpar">✕</button>
+        </div>
+
+        <!-- Abas de navegação -->
+        <nav class="tabs" role="tablist">
+            <button class="tab active" data-tab="inicio" role="tab" aria-selected="true">🎵 Início</button>
+            <button class="tab" data-tab="favoritas" role="tab" aria-selected="false">⭐ Favoritas</button>
+            <button class="tab" data-tab="bloqueadas" role="tab" aria-selected="false">🚫 Bloqueadas</button>
+        </nav>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+            <!-- Tela Início -->
+            <section id="tab-inicio" class="tab-content active">
+                <!-- Cartão da música -->
+                <div class="music-card" id="musicCard">
+                    <div class="card-cover" id="cardCover">
+                        <div class="vinyl-disc" id="vinylDisc" title="Toque para pausar/tocar">
+                            <div class="vinyl-grooves"></div>
+                            <div class="vinyl-label" id="vinylLabel">
+                                <img class="vinyl-cover-img" id="coverImg" src="" alt="Capa da música" style="display: none;">
+                                <span class="vinyl-emoji" id="coverEmoji">🎵</span>
+                            </div>
+                            <div class="vinyl-center-pin"></div>
+                            <div class="vinyl-shine"></div>
+                        </div>
+                        <div class="card-badge" id="cardBadge"></div>
+                    </div>
+
+                    <div class="card-info">
+                        <h2 class="music-title" id="musicTitle">Buscando músicas reais...</h2>
+                        <p class="music-artist" id="musicArtist">Carregando...</p>
+                        <span class="music-genre-tag" id="musicGenre">🎵 Pop</span>
+
+                        <div class="progress-section">
+                            <div class="progress-container" id="progressContainer">
+                                <div class="progress-bar" id="progressBar"></div>
+                            </div>
+                            <div class="progress-time">
+                                <span id="currentTime">0:00</span>
+                                <span id="totalTime">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dica de gesto swipe -->
+                <div class="swipe-hint">
+                    <span class="hint-arrow">⬆️</span>
+                    <span>Arraste o disco para cima para pular</span>
+                </div>
+
+                <!-- Controles Ergonômicos Mobile -->
+                <div class="controls-deck">
+                    <!-- Grupo 1: Interações da música (Bloquear, Deslike, Curtir, Salvar) -->
+                    <div class="action-controls-group">
+                        <button class="btn-control btn-interaction btn-block" id="btnBlock" title="Bloquear música">
+                            <span class="btn-icon">🚫</span>
+                            <span class="btn-tooltip">Bloquear</span>
+                        </button>
+                        <button class="btn-control btn-interaction btn-dislike" id="btnDislike" title="Não gostei">
+                            <span class="btn-icon">👎</span>
+                            <span class="btn-tooltip">Deslike</span>
+                        </button>
+                        <button class="btn-control btn-interaction btn-like" id="btnLike" title="Curtir música">
+                            <span class="btn-icon">❤️</span>
+                            <span class="btn-tooltip">Curtir</span>
+                        </button>
+                        <button class="btn-control btn-interaction btn-save" id="btnSave" title="Salvar favorita">
+                            <span class="btn-icon">⭐</span>
+                            <span class="btn-tooltip">Salvar</span>
+                        </button>
+                    </div>
+
+                    <!-- Grupo 2: Mudança de Faixa e Player (Voltar, Play/Pause no Meio, Pular) -->
+                    <div class="nav-controls-group">
+                        <button class="btn-control btn-nav btn-back" id="btnBack" title="Voltar faixa">
+                            <span class="btn-icon">⏮️</span>
+                            <span class="btn-label">Voltar</span>
+                        </button>
+                        
+                        <button class="btn-control btn-nav btn-playpause" id="btnPlayPause" title="Pausar ou Reproduzir">
+                            <span class="btn-icon" id="playPauseIcon">⏸️</span>
+                        </button>
+
+                        <button class="btn-control btn-nav btn-skip" id="btnSkip" title="Próxima música">
+                            <span class="btn-icon">⏭️</span>
+                            <span class="btn-label">Pular ⬆️</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contadores de estatísticas -->
+                <div class="counters">
+                    <div class="counter-card">
+                        <span class="counter-icon">❤️</span>
+                        <span class="counter-value" id="countLikes">0</span>
+                        <span class="counter-label">Curtidas</span>
+                    </div>
+                    <div class="counter-card">
+                        <span class="counter-icon">🚫</span>
+                        <span class="counter-value" id="countBlocks">0</span>
+                        <span class="counter-label">Bloqueadas</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tela Favoritas -->
+            <section id="tab-favoritas" class="tab-content">
+                <div class="section-header">
+                    <h3 class="section-title">⭐ Músicas Favoritas</h3>
+                    <p class="section-subtitle">Sua coleção de faixas salvas</p>
+                </div>
+                <div class="saved-list" id="favoritesList">
+                    <div class="empty-state">
+                        <span class="empty-icon">⭐</span>
+                        <p class="empty-message">Nenhuma música salva ainda.<br>Toque em <b>⭐ Salvar</b> para guardar suas músicas favoritas!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tela Bloqueadas -->
+            <section id="tab-bloqueadas" class="tab-content">
+                <div class="section-header">
+                    <h3 class="section-title">🚫 Músicas Bloqueadas</h3>
+                    <p class="section-subtitle">Faixas ocultadas da sua fila</p>
+                </div>
+                <div class="saved-list" id="blockedList">
+                    <div class="empty-state">
+                        <span class="empty-icon">🚫</span>
+                        <p class="empty-message">Nenhuma música bloqueada.<br>Toque em <b>🚫 Bloquear</b> para não ouvir mais uma música.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal de configurações -->
+        <div class="modal-overlay" id="configModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>⚙️ Configurações</h3>
+                    <button class="modal-close" id="modalClose">✕</button>
+                </div>
+                <div class="modal-body">
+                    <label for="userNameInput">Seu nome de usuário:</label>
+                    <input type="text" id="userNameInput" placeholder="Digite seu nome..." autocomplete="off">
+                    <button class="modal-btn" id="saveNameBtn">💾 Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast de notificação -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <audio id="audioPlayer" crossorigin="anonymous"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
